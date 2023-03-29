@@ -1,17 +1,15 @@
 package edu.iu.c322.orderservice.model;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 
 public class Address {
-    //TODO: Not empty not working
     @NotEmpty(message = "State cannot be empty in an address!")
     private String state;
     @NotEmpty(message = "city cannot be empty in an address!")
     private String city;
     private int postalCode;
 
-    public Address(@Valid String state, @Valid String city, int postalCode)
+    public Address(String state, String city, int postalCode)
     {
         this.state = state;
         this.city = city;

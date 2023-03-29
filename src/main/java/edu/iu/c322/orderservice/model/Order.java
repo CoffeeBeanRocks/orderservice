@@ -8,11 +8,13 @@ import java.util.Objects;
 public class Order {
     private int customerId;
     private double total;
+    @Valid
     private Address shippingAddress;
+    @Valid
     private List<Item> items;
     private Payment payment;
 
-    public Order(int customerId, double total, @Valid Address shippingAddress, List<Item> items, @Valid Payment payment)
+    public Order(int customerId, double total, Address shippingAddress, List<Item> items, Payment payment)
     {
         this.customerId = customerId;
         this.total = total;
