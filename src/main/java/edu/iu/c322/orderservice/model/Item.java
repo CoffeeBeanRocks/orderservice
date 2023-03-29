@@ -1,11 +1,15 @@
 package edu.iu.c322.orderservice.model;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+
 public class Item {
+    @NotEmpty(message = "Name cannot be empty!")
     private String name;
     private int quantity;
     private double price;
 
-    public Item(String name, int quantity, double price) {
+    public Item(@Valid String name, int quantity, double price) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;

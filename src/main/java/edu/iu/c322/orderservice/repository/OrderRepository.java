@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CustomerRepository {
+public class OrderRepository {
     List<Order> orders = new ArrayList<>();
 
     public List<Order> findAll() {
@@ -34,7 +34,16 @@ public class CustomerRepository {
         }
     }
 
-    private Order getOrderById(int id) {
+    public void delete(int id) {
+        Order x = getOrderById(id);
+        if(x != null) {
+            orders.remove(x);
+        } else {
+            throw new IllegalStateException("order id is not valid!");
+        }
+    }
+
+    public Order getOrderById(int id) {
         return orders.stream().filter(x -> x.getCustomerId() == id).findAny().orElse(null);
     }
 }
