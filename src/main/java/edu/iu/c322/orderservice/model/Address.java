@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 public class Address {
     @NotEmpty(message = "State cannot be empty in an address!")
     private String state;
-    @NotEmpty(message = "city cannot be empty in an address!")
+    @NotEmpty(message = "City cannot be empty in an address!")
     private String city;
     private int postalCode;
 

@@ -1,8 +1,11 @@
 package edu.iu.c322.orderservice.model;
 
+import jakarta.validation.Valid;
+
 public class Payment {
     private String method;
     private String number;
+    @Valid
     private Address billingAddress;
 
     public Payment(String method, String number, Address billingAddress) {

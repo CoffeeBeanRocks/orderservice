@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 
 public class Item {
-    @NotEmpty(message = "Name cannot be empty!")
+    @NotEmpty(message = "Item name cannot be empty")
     private String name;
     private int quantity;
     private double price;
@@ -37,14 +37,5 @@ public class Item {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "{\n" +
-                "\t\"name\": \""+this.name+"\",\n" +
-                "\t\"quantity\": \""+this.quantity+"\",\n" +
-                "\t\"price\": \""+this.price+"\",\n" +
-                "}";
     }
 }

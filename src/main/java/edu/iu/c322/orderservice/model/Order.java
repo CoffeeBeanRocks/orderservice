@@ -12,6 +12,7 @@ public class Order {
     private Address shippingAddress;
     @Valid
     private List<Item> items;
+    @Valid
     private Payment payment;
 
     public Order(int customerId, double total, Address shippingAddress, List<Item> items, Payment payment)
