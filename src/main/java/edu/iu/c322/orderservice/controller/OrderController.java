@@ -1,7 +1,10 @@
 package edu.iu.c322.orderservice.controller;
 
+import edu.iu.c322.orderservice.model.Item;
 import edu.iu.c322.orderservice.model.Order;
+import edu.iu.c322.orderservice.model.Return;
 import edu.iu.c322.orderservice.repository.OrderRepository;
+import edu.iu.c322.orderservice.repository.ReturnRepository;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,14 +15,16 @@ import java.util.List;
 public class OrderController {
 
     private OrderRepository repository;
+    private ReturnRepository returnRepository;
 
     @GetMapping
     public List<Order> findAll() {
         return repository.findAll();
     }
 
-    public OrderController(OrderRepository repository) {
+    public OrderController(OrderRepository repository, ReturnRepository returnRepository) {
         this.repository = repository;
+        this.returnRepository = returnRepository;
     }
 
     @PostMapping
@@ -36,7 +41,18 @@ public class OrderController {
             return order;
     }
 
-    //TODO: Put Mapping, Update Order : (Issue: What is the meaning of "itemId"?)
+    @PutMapping("/return")
+    public void update(@Valid @RequestBody Return newReturn) {
+        Order order = repository.getOrderById(newReturn.getOrderId());
+        if(order == null)
+            throw new IllegalStateException("order id is not valid");
+
+        Item item = order.getItems().stream().filter(x -> x.getId() == newReturn.getItemId()).findAny().orElse(null);
+        if(item == null)
+            throw new IllegalStateException("item id is not valid");
+
+        returnRepository.Update(newReturn);
+    }
 
     @DeleteMapping("/{id}")
     public void update(@PathVariable int id) {

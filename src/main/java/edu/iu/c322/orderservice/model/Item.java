@@ -6,12 +6,12 @@ import jakarta.validation.constraints.NotEmpty;
 public class Item {
     @NotEmpty(message = "Item name cannot be empty")
     private String name;
-    private int quantity;
+    private int id;
     private double price;
 
-    public Item(@Valid String name, int quantity, double price) {
+    public Item(String name, int id, double price) {
         this.name = name;
-        this.quantity = quantity;
+        this.id = id;
         this.price = price;
     }
 
@@ -23,12 +23,12 @@ public class Item {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getId() {
+        return id;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getPrice() {
