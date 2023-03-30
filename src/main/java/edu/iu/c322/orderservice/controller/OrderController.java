@@ -47,9 +47,10 @@ public class OrderController {
         if(order == null)
             throw new IllegalStateException("order id is not valid");
 
-        Item item = order.getItems().stream().filter(x -> x.getId() == newReturn.getItemId()).findAny().orElse(null);
-        if(item == null)
-            throw new IllegalStateException("item id is not valid");
+        //TODO: Enable when itemId has been fixed
+//        Item item = order.getItems().stream().filter(x -> x.getId() == newReturn.getItemId()).findAny().orElse(null);
+//        if(item == null)
+//            throw new IllegalStateException("item id is not valid");
 
         returnRepository.Update(newReturn);
     }
