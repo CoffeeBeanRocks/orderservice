@@ -56,6 +56,11 @@ public class OrderController {
          */
 
         //TODO: How to do merge??
+=======
+        Item item = order.getItems().stream().filter(x -> x.getId() == newReturn.getItemId()).findAny().orElse(null);
+        if(item == null)
+            throw new IllegalStateException("item id is not valid");
+>>>>>>> parent of 45b661a (Disabled itemId error check)
 
     }
 
