@@ -47,6 +47,7 @@ public class OrderController {
     public void update(@Valid @RequestBody Return newReturn) {
         Return var = returnRepository.getReferenceById(newReturn.getOrderId());
 
+<<<<<<< HEAD
         //TODO: Enable when itemId has been fixed
         /*
         Item item = order.getItems().stream().filter(x -> x.getId() == newReturn.getItemId()).findAny().orElse(null);
