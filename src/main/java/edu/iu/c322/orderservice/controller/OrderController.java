@@ -48,6 +48,7 @@ public class OrderController {
         Return var = returnRepository.getReferenceById(newReturn.getOrderId());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         //TODO: Enable when itemId has been fixed
         /*
         Item item = order.getItems().stream().filter(x -> x.getId() == newReturn.getItemId()).findAny().orElse(null);
@@ -56,6 +57,8 @@ public class OrderController {
          */
 
         //TODO: How to do merge??
+=======
+>>>>>>> parent of 45b661a (Disabled itemId error check)
 =======
         Item item = order.getItems().stream().filter(x -> x.getId() == newReturn.getItemId()).findAny().orElse(null);
         if(item == null)
