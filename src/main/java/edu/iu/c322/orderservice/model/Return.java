@@ -1,15 +1,19 @@
 package edu.iu.c322.orderservice.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Return {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private int orderId;
     private int itemId;
     private String reason;
-
-    public Return(int orderId, int itemId, String reason) {
-        this.orderId = orderId;
-        this.itemId = itemId;
-        this.reason = reason;
-    }
 
     public int getOrderId() {
         return orderId;
@@ -33,5 +37,13 @@ public class Return {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

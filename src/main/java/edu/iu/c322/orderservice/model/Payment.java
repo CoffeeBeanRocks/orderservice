@@ -1,18 +1,19 @@
 package edu.iu.c322.orderservice.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 
+@Entity
 public class Payment {
     private String method;
-    private String number;
-    @Valid
-    private Address billingAddress;
 
-    public Payment(String method, String number, Address billingAddress) {
-        this.method = method;
-        this.number = number;
-        this.billingAddress = billingAddress;
-    }
+    @Id
+    private String number;
+
+    @Valid
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address billingAddress;
 
     public String getMethod() {
         return method;

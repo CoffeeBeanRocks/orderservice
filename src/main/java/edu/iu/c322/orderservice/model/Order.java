@@ -1,28 +1,31 @@
 package edu.iu.c322.orderservice.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 
 import java.util.List;
-import java.util.Objects;
 
+@Entity
+@Table(name = "orderModel")
 public class Order {
+    @Id
     private int customerId;
-    private double total;
-    @Valid
-    private Address shippingAddress;
-    @Valid
-    private List<Item> items;
-    @Valid
-    private Payment payment;
 
-    public Order(int customerId, double total, Address shippingAddress, List<Item> items, Payment payment)
-    {
-        this.customerId = customerId;
-        this.total = total;
-        this.shippingAddress = shippingAddress;
-        this.items = items;
-        this.payment = payment;
-    }
+    private double total;
+
+    @Valid
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address shippingAddress;
+
+    @Valid
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Item> items;
+
+    @Valid
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_number", referencedColumnName = "number")
+    private Payment payment;
 
     public int getCustomerId() {
         return customerId;

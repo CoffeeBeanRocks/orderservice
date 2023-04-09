@@ -1,20 +1,27 @@
 package edu.iu.c322.orderservice.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
+@Entity
 public class Address {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     @NotEmpty(message = "State cannot be empty in an address!")
     private String state;
+
     @NotEmpty(message = "City cannot be empty in an address!")
     private String city;
+
     private int postalCode;
 
-    public Address(String state, String city, int postalCode)
-    {
-        this.state = state;
-        this.city = city;
-        this.postalCode = postalCode;
-    }
+//    @OneToOne(mappedBy = "payment")
+//    @JsonBackReference
+//    @JoinColumn(name = "order_id", nullable = false)
+//    private Order order;
 
     public String getState() {
         return state;
@@ -38,5 +45,13 @@ public class Address {
 
     public void setPostalCode(int postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

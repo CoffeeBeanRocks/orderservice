@@ -1,9 +1,6 @@
 package edu.iu.c322.orderservice.repository;
 
-import edu.iu.c322.orderservice.model.Address;
-import edu.iu.c322.orderservice.model.Item;
 import edu.iu.c322.orderservice.model.Order;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;

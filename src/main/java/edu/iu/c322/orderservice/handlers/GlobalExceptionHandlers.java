@@ -20,4 +20,9 @@ public class GlobalExceptionHandlers {
         String errorMessages = exception.getBindingResult().getFieldErrors().stream().map(error -> error.getDefaultMessage()).collect(Collectors.joining(","));
         return ResponseEntity.badRequest().body(errorMessages);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleException(Exception exception) {
+        return ResponseEntity.badRequest().body(exception.getMessage());
+    }
 }

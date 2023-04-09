@@ -1,19 +1,26 @@
 package edu.iu.c322.orderservice.model;
 
-import jakarta.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 
+@Entity
 public class Item {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     @NotEmpty(message = "Item name cannot be empty")
     private String name;
-    private int id;
-    private double price;
 
-    public Item(String name, int id, double price) {
-        this.name = name;
-        this.id = id;
-        this.price = price;
-    }
+    @JsonProperty("quantity")
+    private int quantity;
+
+    private double price;
 
     public String getName() {
         return name;
@@ -23,12 +30,12 @@ public class Item {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setQuantity(int id) {
+        this.quantity = id;
     }
 
     public double getPrice() {
@@ -37,5 +44,13 @@ public class Item {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
