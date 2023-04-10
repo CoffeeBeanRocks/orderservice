@@ -1,5 +1,6 @@
 package edu.iu.c322.orderservice.controller;
 
+import edu.iu.c322.orderservice.model.Item;
 import edu.iu.c322.orderservice.model.Order;
 import edu.iu.c322.orderservice.model.Return;
 import edu.iu.c322.orderservice.repository.OrderRepository;
@@ -9,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/orders")
@@ -31,13 +31,17 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public int create(@Valid @RequestBody Order order){
+        for(int i=0; i<order.getItems().size(); i++) {
+            Item item = order.getItems().get(i);
+            item.setOrder(order);
+        }
         Order addedOrder = repository.save(order);
         return addedOrder.getCustomerId();
     }
 
     @GetMapping({"/{id}"})
-    public Optional<Order> getOrderById(@PathVariable @Valid int id) {
-        return repository.findById(id);
+    public List<Order> getOrderById(@PathVariable @Valid int id) {
+        return repository.findByCustomerId(id);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

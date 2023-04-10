@@ -11,8 +11,8 @@ public class Payment {
     private String number;
 
     @Valid
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
     private Address billingAddress;
 
     public String getMethod() {

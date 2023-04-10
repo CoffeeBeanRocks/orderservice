@@ -14,12 +14,12 @@ public class Order {
     private double total;
 
     @Valid
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address shippingAddress;
 
     @Valid
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<Item> items;
 
     @Valid

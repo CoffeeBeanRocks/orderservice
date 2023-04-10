@@ -18,11 +18,6 @@ public class Address {
 
     private int postalCode;
 
-//    @OneToOne(mappedBy = "payment")
-//    @JsonBackReference
-//    @JoinColumn(name = "order_id", nullable = false)
-//    private Order order;
-
     public String getState() {
         return state;
     }
