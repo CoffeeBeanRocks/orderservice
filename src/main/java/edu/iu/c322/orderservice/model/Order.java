@@ -9,22 +9,19 @@ import java.util.List;
 @Table(name = "orderModel")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private int customerId;
-
     private double total;
 
-    @Valid
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JoinColumn(name = "address_id")
     private Address shippingAddress;
-
-    @Valid
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Item> items;
 
-    @Valid
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "payment_number", referencedColumnName = "number")
+    @JoinColumn(name = "payment_id")
     private Payment payment;
 
     public int getCustomerId() {
@@ -65,5 +62,13 @@ public class Order {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -13,18 +13,14 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotEmpty(message = "Item name cannot be empty")
     private String name;
-
-    @JsonProperty("quantity")
     private int quantity;
+    private float price;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private Order order;
-
-    private double price;
 
     public String getName() {
         return name;
@@ -42,11 +38,11 @@ public class Item {
         this.quantity = id;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

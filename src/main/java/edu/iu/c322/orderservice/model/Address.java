@@ -10,12 +10,8 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotEmpty(message = "State cannot be empty in an address!")
     private String state;
-
-    @NotEmpty(message = "City cannot be empty in an address!")
     private String city;
-
     private int postalCode;
 
     public String getState() {

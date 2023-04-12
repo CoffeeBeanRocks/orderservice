@@ -5,12 +5,14 @@ import jakarta.validation.Valid;
 
 @Entity
 public class Payment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     private String method;
 
-    @Id
     private String number;
 
-    @Valid
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address billingAddress;
@@ -37,5 +39,13 @@ public class Payment {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

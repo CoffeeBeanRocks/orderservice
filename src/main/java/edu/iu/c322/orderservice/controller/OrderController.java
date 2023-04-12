@@ -10,18 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
 
-    private OrderRepository repository;
     private ReturnRepository returnRepository;
-
-    @GetMapping
-    public List<Order> findAll() {
-        return repository.findAll();
-    }
+    private OrderRepository repository;
 
     public OrderController(OrderRepository repository, ReturnRepository returnRepository) {
         this.repository = repository;
@@ -30,29 +26,29 @@ public class OrderController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public int create(@Valid @RequestBody Order order){
-        for(int i=0; i<order.getItems().size(); i++) {
+    public int create(@RequestBody Order order){
+
+        for(int i = 0; i < order.getItems().size(); i++){
             Item item = order.getItems().get(i);
             item.setOrder(order);
         }
         Order addedOrder = repository.save(order);
-        return addedOrder.getCustomerId();
+        return addedOrder.getId();
     }
 
-    @GetMapping({"/{id}"})
-    public List<Order> getOrderById(@PathVariable @Valid int id) {
-        return repository.findByCustomerId(id);
+    @GetMapping("/{customerId}")
+    public List<Order> findByCustomer(@PathVariable int customerId){
+        return repository.findByCustomerId(customerId);
+    }
+
+    @GetMapping("/order/{orderId}")
+    public Optional<Order> findByOrderId(@PathVariable int orderId){
+        return repository.findById(orderId);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/return")
     public void update(@Valid @RequestBody Return newReturn) {
         returnRepository.save(newReturn);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        Order oldOrder = repository.getReferenceById(id);
-        repository.delete(oldOrder);
     }
 }
